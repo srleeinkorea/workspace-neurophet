@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMFoEOn1ZY1ZRwrGx70bSk9ATwrl77ceo",
+            authDomain: "neurophetmarketing-pj001-login.firebaseapp.com",
+            projectId: "neurophetmarketing-pj001-login",
+            storageBucket: "neurophetmarketing-pj001-login.appspot.com",
+            appId: "1:180431876787:web:d91379db811a07ea64b6c6",
+
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function signUp() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("회원가입 성공!");
+                })
+                .catch((error) => {
+                    alert("회원가입 실패: " + error.message);
+                });
+        }
+
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("로그인 성공!");
+                    // 로그인 후 게시판 페이지로 이동할 수 있습니다.
+                })
+                .catch((error) => {
+                    alert("로그인 실패: " + error.message);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>로그인 페이지</h1>
+    <input type="email" id="email" placeholder="이메일" required>
+    <input type="password" id="password" placeholder="비밀번호" required>
+    <button onclick="signUp()">회원가입</button>
+    <button onclick="login()">로그인</button>
+</body>
+
+</html>
